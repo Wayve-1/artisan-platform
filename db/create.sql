@@ -29,14 +29,3 @@ CREATE TABLE artisan (
   id_specialite INT NOT NULL,
   FOREIGN KEY (id_specialite) REFERENCES specialite(id)
 );
-
-
-CREATE TABLE MessageContact (
-    id_message INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    nom_expediteur VARCHAR(150) NOT NULL,
-    email VARCHAR(150) NOT NULL,
-    Object VARCHAR(200) NOT NULL,
-    message TEXT NOT NULL,
-    id_artisan INT NOT NULL,
-    FOREIGN KEY (id_artisan) REFERENCES Artisan(id_artisan)
-);
