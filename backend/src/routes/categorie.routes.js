@@ -1,12 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const categorieController = require("../controllers/categorie.controller");
+const { Categorie } = require("../../models");
 
-console.log("✅ categorie.routes.js bien chargé");
-router.get("/categories", categorieController.getAllCategories);
-router.get(
-  "/categories/:id/specialites",
-  categorieController.getSpecialitesByCategorie
-);
+// GET /api/categories
+router.get("/", async (req, res) => {
+  try {
+    const categories = await Categorie.findAll({
+      attributes: ["id", "nom", "slug"],
+      order: [["id", "ASC"]],
+    });
+    res.json(categories);
+  } catch (err) {
+    console.error("Erreur GET /api/categories:", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
 
 module.exports = router;

@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const Artisan = require("../models/Artisan");
 
 exports.sendContactEmail = async (req, res) => {
-  const { id } = req.params; // ID de l'artisan
+  const { id } = req.params;
   const { nom, email, objet, message } = req.body;
 
   try {

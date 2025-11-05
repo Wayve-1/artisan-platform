@@ -1,12 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const specialiteController = require("../controllers/specialite.controller");
+const Specialite = require("../../models");
 
-router.get("/specialites", specialiteController.getAllSpecialites);
-router.get("/specialites/:id", specialiteController.getSpecialiteById);
-router.get(
-  "/specialites/:id/artisans",
-  specialiteController.getArtisansBySpecialite
-);
+// GET /api/specialites
+router.get("/", async (req, res) => {
+  try {
+    const specialites = await Specialite.findAll();
+    res.json(specialites);
+  } catch (err) {
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// GET /api/specialites/:id
+router.get("/:id", async (req, res) => {
+  try {
+    const specialite = await Specialite.findByPk(req.params.id);
+    if (!specialite)
+      return res.status(404).json({ error: "Spécialité non trouvée" });
+    res.json(specialite);
+  } catch (err) {
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
 
 module.exports = router;

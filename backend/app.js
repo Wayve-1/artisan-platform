@@ -1,37 +1,32 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { sequelize } = require("./src/config/database.js");
-const Artisan = require("./src/models/Artisan");
-const Specialite = require("./src/models/Specialite");
-const Categorie = require("./src/models/Categorie");
+const { sequelize } = require("./models");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
+// Import des routes
 const artisanRoutes = require("./src/routes/artisan.routes");
-app.use(artisanRoutes);
-const categorieRoutes = require("./src/routes/categorie.routes");
-app.use(categorieRoutes);
 const specialiteRoutes = require("./src/routes/specialite.routes");
-app.use(specialiteRoutes);
-const contactRoutes = require("./src/routes/contact.routes");
-app.use(contactRoutes);
+const categorieRoutes = require("./src/routes/categorie.routes");
 
-app.get("/", (req, res) => {
-  res.json({ message: "Bienvenue sur l'API Artisans 🎨🔧" });
-});
+// Montage des routes
+app.use("/api/artisans", artisanRoutes);
+app.use("/api/specialites", specialiteRoutes);
+app.use("/api/categories", categorieRoutes);
 
+// Test de connexion DB
 sequelize
   .authenticate()
-  .then(() => console.log("✅ Connexion MySQL réussie"))
-  .catch((err) => console.error("❌ Erreur MySQL :", err));
+  .then(() => console.log("✅ Connexion à la base de données réussie"))
+  .catch((err) => console.error("❌ Erreur de connexion à la base :", err));
 
+// Lancement du serveur
 app.listen(PORT, () => {
-  console.log(`🟢 Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
 });
-
-module.exports = app;

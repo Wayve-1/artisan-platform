@@ -2,7 +2,7 @@ const Specialite = require("../models/Specialite");
 const Categorie = require("../models/Categorie");
 const Artisan = require("../models/Artisan");
 
-// On inclut la catégorie liée à chaque spécialité
+// Catégorie liée à chaque spécialité
 Specialite.belongsTo(Categorie, { foreignKey: "id_categorie" });
 
 exports.getAllSpecialites = async (req, res) => {
