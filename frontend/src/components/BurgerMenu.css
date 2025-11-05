@@ -1,0 +1,129 @@
+.burger-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Bouton burger */
+.burger-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 25px;
+  width: 25px;
+  z-index: 1100;
+}
+
+.burger-button span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #384050;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animation croix */
+.burger-button.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.burger-button.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger-button.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Menu en mode “cadre flottant” */
+.burger-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #f1f8fc;
+  border-radius: 10px;
+  width: 320px;
+  padding: 15px;
+  display: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.burger-menu.show {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Barre de recherche*/
+.burger-search {
+  margin-bottom: 1rem;
+}
+
+.burger-search .search-form {
+  display: flex;
+  gap: 6px;
+}
+
+.burger-search .search-input {
+  flex: 1;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #f1f8fc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.burger-search .search-input:focus {
+  border-color: #0074c7;
+  outline: none;
+}
+
+.burger-search .search-button {
+  background: #0074c7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.burger-search .search-button:hover {
+  background: #00497c;
+}
+
+/* Liste catégories */
+.burger-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.burger-menu li {
+  margin: 10px 0;
+}
+
+.burger-menu a {
+  text-decoration: none;
+  color: #384050;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.burger-menu a:hover {
+  color: #0074c7;
+}
