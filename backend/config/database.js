@@ -16,4 +16,20 @@ const sequelize = new Sequelize(
   }
 );
 
+// Test de connexion + création des tables
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("✅ Connexion DB réussie");
+    return sequelize.sync({ alter: true });
+    // alter: true = adapte les tables aux modèles sans tout écraser
+    // force: true = recrée tout à zéro (⚠️ ça supprime les données)
+  })
+  .then(() => {
+    console.log("✅ Tables créées/mises à jour");
+  })
+  .catch((err) => {
+    console.error("❌ Erreur de connexion DB:", err);
+  });
+
 module.exports = { sequelize };
