@@ -1,20 +1,14 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(process.env.MYSQL_PUBLIC_URL, {
-  dialect: "mysql",
+const sequelize = new Sequelize(process.env.POSTGRES_URL, {
+  dialect: "postgres",
   logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, // Planetscale impose SSL
-    },
-  },
 });
 
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ Connexion DB réussie");
+    console.log("✅ Connexion PostgreSQL réussie");
     await sequelize.sync({ alter: true });
     console.log("✅ Tables créées/mises à jour");
   } catch (err) {
