@@ -4,6 +4,8 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+console.log("MYSQL_PUBLIC_URL:", process.env.MYSQL_PUBLIC_URL);
+
 const sequelize = new Sequelize(process.env.MYSQL_PUBLIC_URL, {
   dialect: "mysql",
   logging: false,
