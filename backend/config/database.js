@@ -1,19 +1,15 @@
 const { Sequelize } = require("sequelize");
 
-// Connexion directe à Railway (Public Network URL)
-const sequelize = new Sequelize(
-  "mysql://user:password@yamabiko.proxy.rlwy.net:3306/database",
-  {
-    dialect: "mysql",
-    logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false, // nécessaire pour Railway
-      },
+const sequelize = new Sequelize(process.env.MYSQL_PUBLIC_URL, {
+  dialect: "mysql",
+  logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // Planetscale impose SSL
     },
-  }
-);
+  },
+});
 
 (async () => {
   try {
