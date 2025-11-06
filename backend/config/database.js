@@ -1,30 +1,29 @@
 const { Sequelize } = require("sequelize");
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+// Connexion directe à Railway (Public Network URL)
+const sequelize = new Sequelize(
+  "mysql://user:password@yamabiko.proxy.rlwy.net:3306/database",
+  {
+    dialect: "mysql",
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // nécessaire pour Railway
+      },
+    },
+  }
+);
 
-console.log("MYSQL_PUBLIC_URL:", process.env.MYSQL_PUBLIC_URL);
-
-const sequelize = new Sequelize(process.env.MYSQL_PUBLIC_URL, {
-  dialect: "mysql",
-  logging: false,
-  dialectOptions: {
-    ssl: { require: true, rejectUnauthorized: false },
-  },
-});
-
-sequelize
-  .authenticate()
-  .then(() => {
+(async () => {
+  try {
+    await sequelize.authenticate();
     console.log("✅ Connexion DB réussie");
-    return sequelize.sync({ alter: true });
-  })
-  .then(() => {
+    await sequelize.sync({ alter: true });
     console.log("✅ Tables créées/mises à jour");
-  })
-  .catch((err) => {
-    console.error("❌ Erreur de connexion DB:", err);
-  });
+  } catch (err) {
+    console.error("❌ Erreur de connexion DB:", err.message);
+  }
+})();
 
 module.exports = { sequelize };
