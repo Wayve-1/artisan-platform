@@ -1,12 +1,9 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(
-  "postgres://user:password@containers-us-west-123.railway.app:5432/railway",
-  {
-    dialect: "postgres",
-    logging: false,
-  }
-);
+const sequelize = new Sequelize(process.env.POSTGRES_URL, {
+  dialect: "postgres",
+  logging: false,
+});
 
 (async () => {
   try {
