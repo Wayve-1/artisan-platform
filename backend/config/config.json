@@ -1,24 +1,24 @@
 {
   "development": {
     "username": "root",
-    "password": "09102302Vj.",
-    "database": "artisans_db",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "password": "jTbIAiLFFuWcdnipavfQIbvAmKTjAvQZ",
+    "database": "railway",
+    "host": "localhost",
+    "port": 3306,
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "YhogGXQssdCsYYDFnlIklsuiBSIbivcn",
+    "password": "jTbIAiLFFuWcdnipavfQIbvAmKTjAvQZ",
     "database": "railway",
-    "host": "mysql://root:jTbIAiLFFuWcdnipavfQIbvAmKTjAvQZ@yamabiko.proxy.rlwy.net:40956/railway",
-    "port": 22898,
-    "dialect": "mysql"
+    "host": "yamabiko.proxy.rlwy.net",
+    "port": 40956,
+    "dialect": "mysql",
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    }
   }
 }
