@@ -20,6 +20,13 @@ app.use("/api/artisans", artisanRoutes);
 app.use("/api/specialites", specialiteRoutes);
 app.use("/api/categories", categorieRoutes);
 
+// Routes tests
+app.get("/", (req, res) => {
+  res.send(
+    "✅ API Artisan en ligne. Essayez /api/artisans, /api/categories, /api/specialites"
+  );
+});
+
 // Test de connexion DB
 sequelize
   .authenticate()
