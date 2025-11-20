@@ -16,6 +16,7 @@ const specialiteRoutes = require("./src/routes/specialite.routes");
 const categorieRoutes = require("./src/routes/categorie.routes");
 
 // Montage des routes
+console.log("✅ Routes artisans montées");
 app.use("/api/artisans", artisanRoutes);
 app.use("/api/specialites", specialiteRoutes);
 app.use("/api/categories", categorieRoutes);
