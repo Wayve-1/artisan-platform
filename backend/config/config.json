@@ -13,6 +13,7 @@
     "database": "railway",
     "host": "yamabiko.proxy.rlwy.net",
     "port": 40956,
+    "use_env_variable": "DATABASE_URL",
     "dialect": "mysql",
     "pool": {
       "max": 5,
