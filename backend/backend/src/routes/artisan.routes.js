@@ -5,7 +5,6 @@ const { Op } = require("sequelize");
 
 // 👉 GET /api/artisans (liste avec filtres)
 router.get("/", async (req, res) => {
-  console.log("✅ Route GET /api/artisans appelée");
   try {
     const { id_categorie, categorie, search } = req.query;
     const normalizedSlug = categorie ? String(categorie).toLowerCase() : null;

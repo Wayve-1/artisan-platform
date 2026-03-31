@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 const { sequelize } = require("./models");
 
 const app = express();
@@ -11,19 +10,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Import des routes avec chemins absolus
-const artisanRoutes = require(path.join(
-  __dirname,
-  "src/routes/artisan.routes"
-));
-const specialiteRoutes = require(path.join(
-  __dirname,
-  "src/routes/specialite.routes"
-));
-const categorieRoutes = require(path.join(
-  __dirname,
-  "src/routes/categorie.routes"
-));
+// Import des routes
+const artisanRoutes = require("./src/routes/artisan.routes");
+const specialiteRoutes = require("./src/routes/specialite.routes");
+const categorieRoutes = require("./src/routes/categorie.routes");
 
 // Montage des routes
 console.log("✅ Routes artisans montées");
@@ -31,14 +21,14 @@ app.use("/api/artisans", artisanRoutes);
 app.use("/api/specialites", specialiteRoutes);
 app.use("/api/categories", categorieRoutes);
 
-// Route test
+// Routes tests
 app.get("/", (req, res) => {
   res.send(
     "✅ API Artisan en ligne. Essayez /api/artisans, /api/categories, /api/specialites"
   );
 });
 
-// Test DB
+// Test de connexion DB
 sequelize
   .authenticate()
   .then(() => console.log("✅ Connexion à la base de données réussie"))
