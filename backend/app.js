@@ -44,4 +44,8 @@ sequelize
   .then(() => console.log("✅ Connexion à la base de données réussie"))
   .catch((err) => console.error("❌ Erreur de connexion à la base :", err));
 
+app.listen(PORT, () => {
+  console.log(`🚀 Serveur lancé sur le port ${PORT}`);
+});
+
 module.exports = app;
